@@ -21,7 +21,7 @@ proc defaultOutputPath*(inputPath: string): string =
 
 proc parseArgs*(): tuple[inputPath: string, outputPath: string, listOnly: bool, shouldStubSpec: ShouldStub, returnValue: uint32] =
   result.shouldStubSpec = newShouldStub()
-  result.returnValue = 76
+  result.returnValue = DefDummyReturnValue
   var stubModuleValues: seq[string]
   var stubFunctionValues: seq[string]
   var sawStubOption = false

@@ -39,6 +39,7 @@ type
     data: string
     pos: int
 
+const DefDummyReturnValue* = 76
 proc newShouldStub*(): ShouldStub =
   result.modules = initTable[string, FunctionsToStub]()
   result.modules["wasi_snapshot_preview1"] = FunctionsToStub(mode: smAll)
@@ -315,7 +316,7 @@ proc buildStubList(types: seq[FunctionType]; imports: seq[ImportEntry]; shouldSt
     else:
       result.keptImports.add entry
 
-proc stubWasiFunctions*(binary: string; shouldStubSpec: ShouldStub; returnValue: uint32): string =
+proc stubWasiFunctions*(binary: string; shouldStubSpec = newShouldStub(); returnValue: uint32 = DefDummyReturnValue): string =
   let sections = splitSections(binary)
 
   var types: seq[FunctionType]
